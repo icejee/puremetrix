@@ -117,7 +117,7 @@ export default function AdminLogin({ onLogin, onCancel }: AdminLoginProps) {
           </form>
 
           <div className="mt-6 pt-6 border-t text-center">
-            <p className="text-xs text-muted-foreground">Demo credentials: admin / puremetrix2024</p>
+            <p className="text-xs text-muted-foreground"> </p>
           </div>
         </CardContent>
       </Card>

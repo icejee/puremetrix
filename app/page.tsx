@@ -38,9 +38,16 @@ export default function PuremetrixWebsite() {
   const [serviceVideos, setServiceVideos] = useState<{ [key: string]: string }>({})
   const [companyLogo, setCompanyLogo] = useState("")
 
-  const [contactPhone, setContactPhone] = useState("+263 4 123 4567")
-  const [contactEmail, setContactEmail] = useState("puremetrix@gmail.com")
-  const [contactAddress, setContactAddress] = useState("Norton, Zimbabwe")
+  // Default contact info
+  const defaultPhone = "+263786495533"
+  const defaultEmail = "puremetrix@gmail.com"
+  const defaultAddress = "Norton, Zimbabwe"
+  const defaultWhatsapp = "263786495533"
+
+  const [contactPhone, setContactPhone] = useState(defaultPhone)
+  const [contactEmail, setContactEmail] = useState(defaultEmail)
+  const [contactAddress, setContactAddress] = useState(defaultAddress)
+  const [whatsappNumber, setWhatsappNumber] = useState(defaultWhatsapp)
 
   useEffect(() => {
     const savedHeroImage = localStorage.getItem("heroImage")
@@ -51,15 +58,17 @@ export default function PuremetrixWebsite() {
     const savedPhone = localStorage.getItem("contactPhone")
     const savedEmail = localStorage.getItem("contactEmail")
     const savedAddress = localStorage.getItem("contactAddress")
+    const savedWhatsapp = localStorage.getItem("whatsappNumber")
 
     if (savedHeroImage) setHeroImage(savedHeroImage)
     if (savedAboutImage) setAboutImage(savedAboutImage)
     if (savedServiceImages) setServiceImages(JSON.parse(savedServiceImages))
     if (savedServiceVideos) setServiceVideos(JSON.parse(savedServiceVideos))
     if (savedLogo) setCompanyLogo(savedLogo)
-    if (savedPhone) setContactPhone(savedPhone)
-    if (savedEmail) setContactEmail(savedEmail)
-    if (savedAddress) setContactAddress(savedAddress)
+    setContactPhone(savedPhone || defaultPhone)
+    setContactEmail(savedEmail || defaultEmail)
+    setContactAddress(savedAddress || defaultAddress)
+    setWhatsappNumber(savedWhatsapp || defaultWhatsapp)
   }, [])
 
   const handleAdminClick = () => {
@@ -158,7 +167,7 @@ export default function PuremetrixWebsite() {
               <div className="flex items-center space-x-3">
                 {companyLogo ? (
                   <img
-                    src={companyLogo || "/placeholder.png"}
+                    src={companyLogo}
                     alt="Puremetrix Logo"
                     className="h-10 w-10 object-contain"
                     onError={(e) => {
@@ -167,8 +176,9 @@ export default function PuremetrixWebsite() {
                       target.nextElementSibling?.classList.remove("hidden")
                     }}
                   />
-                ) : null}
-                <Shield className={`h-8 w-8 text-yellow-400 ${companyLogo ? "hidden" : ""}`} />
+                ) : (
+                  <Shield className="h-8 w-8 text-yellow-400" />
+                )}
                 <span className="text-xl font-bold bg-gradient-to-r from-white to-yellow-200 bg-clip-text text-transparent">
                   Puremetrix Engineering
                 </span>
@@ -472,7 +482,7 @@ export default function PuremetrixWebsite() {
                 <div className="flex space-x-4">
                   <Button
                     className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3"
-                    onClick={() => window.open("https://wa.me/263786495533", "_blank")}
+                    onClick={() => window.open(`https://wa.me/${whatsappNumber}`, "_blank")}
                   >
                     <MessageCircle className="h-5 w-5 mr-2" />
                     WhatsApp
