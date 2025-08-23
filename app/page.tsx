@@ -434,7 +434,7 @@ export default function PuremetrixWebsite() {
                 <div className="flex space-x-4">
                   <Button
                     className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3"
-                    onClick={() => window.open("https://wa.me/2634123456", "_blank")}
+                    onClick={() => window.open("https://wa.me/2637", "_blank")}
                   >
                     <MessageCircle className="h-5 w-5 mr-2" />
                     WhatsApp
@@ -538,7 +538,7 @@ export default function PuremetrixWebsite() {
           </div>
 
           <div className="border-t border-slate-700 mt-12 pt-8 text-center">
-            <p className="text-sm text-slate-400">© 2024 Puremetrix Engineering (Pvt) Ltd. All rights reserved.</p>
+            <p className="text-sm text-slate-400">© 2025 Puremetrix Engineering (Pvt) Ltd. All rights reserved.</p>
           </div>
         </div>
       </footer>
