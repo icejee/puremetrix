@@ -148,13 +148,17 @@ export default function PuremetrixWebsite() {
               <div className="flex items-center space-x-3">
                 {companyLogo ? (
                   <img
-                    src={companyLogo || "/placeholder.svg"}
+                    src={companyLogo || "/placeholder.png"}
                     alt="Puremetrix Logo"
                     className="h-10 w-10 object-contain"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement
+                      target.style.display = "none"
+                      target.nextElementSibling?.classList.remove("hidden")
+                    }}
                   />
-                ) : (
-                  <Shield className="h-8 w-8 text-yellow-400" />
-                )}
+                ) : null}
+                <Shield className={`h-8 w-8 text-yellow-400 ${companyLogo ? "hidden" : ""}`} />
                 <span className="text-xl font-bold bg-gradient-to-r from-white to-yellow-200 bg-clip-text text-transparent">
                   Puremetrix Engineering
                 </span>
@@ -239,18 +243,24 @@ export default function PuremetrixWebsite() {
             <div className="relative">
               {heroImage ? (
                 <img
-                  src={heroImage || "/placeholder.svg"}
+                  src={heroImage || "/placeholder.png"}
                   alt="Security solutions"
                   className="rounded-2xl shadow-2xl w-full h-96 object-cover"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement
+                    target.style.display = "none"
+                    target.nextElementSibling?.classList.remove("hidden")
+                  }}
                 />
-              ) : (
-                <div className="bg-gradient-to-br from-blue-700 to-blue-600 rounded-2xl shadow-2xl w-full h-96 flex items-center justify-center">
-                  <div className="text-center">
-                    <Shield className="h-24 w-24 text-yellow-400 mx-auto mb-4" />
-                    <p className="text-blue-100">Upload hero image via admin panel</p>
-                  </div>
+              ) : null}
+              <div
+                className={`bg-gradient-to-br from-blue-700 to-blue-600 rounded-2xl shadow-2xl w-full h-96 flex items-center justify-center ${heroImage ? "hidden" : ""}`}
+              >
+                <div className="text-center">
+                  <Shield className="h-24 w-24 text-yellow-400 mx-auto mb-4" />
+                  <p className="text-blue-100">Upload hero image via admin panel</p>
                 </div>
-              )}
+              </div>
             </div>
           </div>
         </div>
@@ -285,14 +295,26 @@ export default function PuremetrixWebsite() {
 
                   {serviceImages[service.id] && (
                     <img
-                      src={serviceImages[service.id] || "/placeholder.svg"}
+                      src={serviceImages[service.id] || "/placeholder.png"}
                       alt={service.title}
                       className="w-full h-48 object-cover rounded-lg"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement
+                        target.style.display = "none"
+                      }}
                     />
                   )}
 
                   {serviceVideos[service.id] && (
-                    <video src={serviceVideos[service.id]} controls className="w-full h-48 object-cover rounded-lg" />
+                    <video
+                      src={serviceVideos[service.id]}
+                      controls
+                      className="w-full h-48 object-cover rounded-lg"
+                      onError={(e) => {
+                        const target = e.target as HTMLVideoElement
+                        target.style.display = "none"
+                      }}
+                    />
                   )}
                 </CardContent>
               </Card>
@@ -354,18 +376,24 @@ export default function PuremetrixWebsite() {
             <div className="relative">
               {aboutImage ? (
                 <img
-                  src={aboutImage || "/placeholder.svg"}
+                  src={aboutImage || "/placeholder.png"}
                   alt="Security installation team"
                   className="rounded-2xl shadow-xl w-full h-96 object-cover"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement
+                    target.style.display = "none"
+                    target.nextElementSibling?.classList.remove("hidden")
+                  }}
                 />
-              ) : (
-                <div className="bg-gradient-to-br from-blue-100 to-yellow-100 rounded-2xl shadow-xl w-full h-96 flex items-center justify-center">
-                  <div className="text-center">
-                    <Building className="h-24 w-24 text-blue-600 mx-auto mb-4" />
-                    <p className="text-slate-600">Upload company image via admin panel</p>
-                  </div>
+              ) : null}
+              <div
+                className={`bg-gradient-to-br from-blue-100 to-yellow-100 rounded-2xl shadow-xl w-full h-96 flex items-center justify-center ${aboutImage ? "hidden" : ""}`}
+              >
+                <div className="text-center">
+                  <Building className="h-24 w-24 text-blue-600 mx-auto mb-4" />
+                  <p className="text-slate-600">Upload company image via admin panel</p>
                 </div>
-              )}
+              </div>
             </div>
           </div>
 
@@ -434,7 +462,7 @@ export default function PuremetrixWebsite() {
                 <div className="flex space-x-4">
                   <Button
                     className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3"
-                    onClick={() => window.open("https://wa.me/2637", "_blank")}
+                    onClick={() => window.open("https://wa.me/2634123456", "_blank")}
                   >
                     <MessageCircle className="h-5 w-5 mr-2" />
                     WhatsApp
@@ -496,13 +524,17 @@ export default function PuremetrixWebsite() {
               <div className="flex items-center space-x-3">
                 {companyLogo ? (
                   <img
-                    src={companyLogo || "/placeholder.svg"}
+                    src={companyLogo || "/placeholder.png"}
                     alt="Puremetrix Logo"
                     className="h-10 w-10 object-contain"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement
+                      target.style.display = "none"
+                      target.nextElementSibling?.classList.remove("hidden")
+                    }}
                   />
-                ) : (
-                  <Shield className="h-8 w-8 text-yellow-400" />
-                )}
+                ) : null}
+                <Shield className={`h-8 w-8 text-yellow-400 ${companyLogo ? "hidden" : ""}`} />
                 <span className="text-2xl font-bold bg-gradient-to-r from-white to-yellow-200 bg-clip-text text-transparent">
                   Puremetrix Engineering
                 </span>
@@ -538,7 +570,7 @@ export default function PuremetrixWebsite() {
           </div>
 
           <div className="border-t border-slate-700 mt-12 pt-8 text-center">
-            <p className="text-sm text-slate-400">© 2025 Puremetrix Engineering (Pvt) Ltd. All rights reserved.</p>
+            <p className="text-sm text-slate-400">© 2024 Puremetrix Engineering (Pvt) Ltd. All rights reserved.</p>
           </div>
         </div>
       </footer>
