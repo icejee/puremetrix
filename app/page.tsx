@@ -38,18 +38,14 @@ export default function PuremetrixWebsite() {
   const [serviceVideos, setServiceVideos] = useState<{ [key: string]: string }>({})
   const [companyLogo, setCompanyLogo] = useState("")
 
-  // Default contact info
-  const defaultPhone = "+263786495533"
-  const defaultEmail = "puremetrix@gmail.com"
-  const defaultAddress = "Norton, Zimbabwe"
-  const defaultWhatsapp = "263786495533"
-
-  const [contactPhone, setContactPhone] = useState(defaultPhone)
-  const [contactEmail, setContactEmail] = useState(defaultEmail)
-  const [contactAddress, setContactAddress] = useState(defaultAddress)
-  const [whatsappNumber, setWhatsappNumber] = useState(defaultWhatsapp)
+  // Contact info state (no hardcoded values)
+  const [contactPhone, setContactPhone] = useState("")
+  const [contactEmail, setContactEmail] = useState("")
+  const [contactAddress, setContactAddress] = useState("")
+  const [whatsappNumber, setWhatsappNumber] = useState("")
 
   useEffect(() => {
+    // Load all info from localStorage (set by admin panel)
     const savedHeroImage = localStorage.getItem("heroImage")
     const savedAboutImage = localStorage.getItem("aboutImage")
     const savedServiceImages = localStorage.getItem("serviceImages")
@@ -65,10 +61,10 @@ export default function PuremetrixWebsite() {
     if (savedServiceImages) setServiceImages(JSON.parse(savedServiceImages))
     if (savedServiceVideos) setServiceVideos(JSON.parse(savedServiceVideos))
     if (savedLogo) setCompanyLogo(savedLogo)
-    setContactPhone(savedPhone || defaultPhone)
-    setContactEmail(savedEmail || defaultEmail)
-    setContactAddress(savedAddress || defaultAddress)
-    setWhatsappNumber(savedWhatsapp || defaultWhatsapp)
+    setContactPhone(savedPhone || "")
+    setContactEmail(savedEmail || "")
+    setContactAddress(savedAddress || "")
+    setWhatsappNumber(savedWhatsapp || "")
   }, [])
 
   const handleAdminClick = () => {
@@ -158,18 +154,18 @@ export default function PuremetrixWebsite() {
   ]
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-blue-50 to-white">
       {/* Navigation */}
-      <nav className="bg-gradient-to-r from-blue-900 via-blue-800 to-blue-900 text-white sticky top-0 z-50 shadow-lg backdrop-blur-sm">
+      <nav className="bg-white/90 backdrop-blur-lg shadow-lg sticky top-0 z-50 border-b border-blue-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
+          <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-3">
                 {companyLogo ? (
                   <img
                     src={companyLogo}
                     alt="Puremetrix Logo"
-                    className="h-10 w-10 object-contain"
+                    className="h-12 w-12 object-contain rounded-full border border-blue-200 bg-white shadow"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement
                       target.style.display = "none"
@@ -177,21 +173,21 @@ export default function PuremetrixWebsite() {
                     }}
                   />
                 ) : (
-                  <Shield className="h-8 w-8 text-yellow-400" />
+                  <Shield className="h-10 w-10 text-yellow-400" />
                 )}
-                <span className="text-xl font-bold bg-gradient-to-r from-white to-yellow-200 bg-clip-text text-transparent">
+                <span className="text-2xl font-extrabold bg-gradient-to-r from-blue-900 to-yellow-400 bg-clip-text text-transparent tracking-tight">
                   Puremetrix Engineering
                 </span>
               </div>
             </div>
             <div className="hidden md:flex items-center space-x-8">
-              <a href="#services" className="hover:text-yellow-400 transition-colors font-medium">
+              <a href="#services" className="hover:text-blue-700 transition-colors font-medium">
                 Services
               </a>
-              <a href="#about" className="hover:text-yellow-400 transition-colors font-medium">
+              <a href="#about" className="hover:text-blue-700 transition-colors font-medium">
                 About
               </a>
-              <a href="#contact" className="hover:text-yellow-400 transition-colors font-medium">
+              <a href="#contact" className="hover:text-blue-700 transition-colors font-medium">
                 Contact
               </a>
               <Button
@@ -207,7 +203,7 @@ export default function PuremetrixWebsite() {
                   variant="ghost"
                   size="sm"
                   onClick={handleAdminLogout}
-                  className="text-white/80 hover:text-white hover:bg-white/10"
+                  className="text-blue-900/80 hover:text-blue-900 hover:bg-blue-100"
                 >
                   Logout
                 </Button>
@@ -437,52 +433,52 @@ export default function PuremetrixWebsite() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-24 bg-gradient-to-b from-slate-50 to-white">
+      <section id="contact" className="py-24 bg-gradient-to-b from-blue-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-4xl lg:text-5xl font-bold mb-6 text-slate-900">Get In Touch</h2>
-            <p className="text-xl text-slate-600">Ready to secure your business? Contact us for a consultation.</p>
+            <h2 className="text-4xl lg:text-5xl font-extrabold mb-6 text-blue-900">Get In Touch</h2>
+            <p className="text-xl text-blue-700">Ready to secure your business? Contact us for a consultation.</p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-16">
             <div className="space-y-8">
-              <h3 className="text-3xl font-bold text-slate-900">Contact Information</h3>
+              <h3 className="text-3xl font-bold text-blue-900">Contact Information</h3>
               <div className="space-y-6">
-                <div className="flex items-center space-x-4 p-4 bg-white rounded-xl shadow-md">
+                <div className="flex items-center space-x-4 p-4 bg-white rounded-xl shadow-md border border-blue-100">
                   <div className="bg-blue-100 p-3 rounded-full">
                     <Phone className="h-6 w-6 text-blue-600" />
                   </div>
                   <div>
-                    <p className="font-semibold text-slate-900">Phone</p>
-                    <p className="text-slate-600">{contactPhone}</p>
+                    <p className="font-semibold text-blue-900">Phone</p>
+                    <p className="text-blue-700">{contactPhone || "Not set"}</p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-4 p-4 bg-white rounded-xl shadow-md">
+                <div className="flex items-center space-x-4 p-4 bg-white rounded-xl shadow-md border border-blue-100">
                   <div className="bg-blue-100 p-3 rounded-full">
                     <Mail className="h-6 w-6 text-blue-600" />
                   </div>
                   <div>
-                    <p className="font-semibold text-slate-900">Email</p>
-                    <p className="text-slate-600">{contactEmail}</p>
+                    <p className="font-semibold text-blue-900">Email</p>
+                    <p className="text-blue-700">{contactEmail || "puremetrix@gmail.com"}</p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-4 p-4 bg-white rounded-xl shadow-md">
+                <div className="flex items-center space-x-4 p-4 bg-white rounded-xl shadow-md border border-blue-100">
                   <div className="bg-blue-100 p-3 rounded-full">
                     <MapPin className="h-6 w-6 text-blue-600" />
                   </div>
                   <div>
-                    <p className="font-semibold text-slate-900">Address</p>
-                    <p className="text-slate-600">{contactAddress}</p>
+                    <p className="font-semibold text-blue-900">Address</p>
+                    <p className="text-blue-700">{contactAddress || "Norton, Zimbabwe"}</p>
                   </div>
                 </div>
               </div>
 
               <div className="space-y-4">
-                <h4 className="text-xl font-bold text-slate-900">Connect With Us</h4>
+                <h4 className="text-xl font-bold text-blue-900">Connect With Us</h4>
                 <div className="flex space-x-4">
                   <Button
                     className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3"
-                    onClick={() => window.open(`https://wa.me/${whatsappNumber}`, "_blank")}
+                    onClick={() => window.open(`https://wa.me/${whatsappNumber || "263786495533"}`, "_blank")}
                   >
                     <MessageCircle className="h-5 w-5 mr-2" />
                     WhatsApp
@@ -499,32 +495,32 @@ export default function PuremetrixWebsite() {
             </div>
 
             <Card className="p-8 shadow-xl border-0 bg-white">
-              <h3 className="text-3xl font-bold mb-6 text-slate-900">Send us a Message</h3>
+              <h3 className="text-3xl font-bold mb-6 text-blue-900">Send us a Message</h3>
               <form className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-slate-700">Name</label>
-                    <Input placeholder="Your name" className="border-slate-200 focus:border-blue-500" />
+                    <label className="block text-sm font-semibold mb-2 text-blue-700">Name</label>
+                    <Input placeholder="Your name" className="border-blue-200 focus:border-blue-500" />
                   </div>
                   <div>
-                    <label className="block text-sm font-semibold mb-2 text-slate-700">Company</label>
-                    <Input placeholder="Company name" className="border-slate-200 focus:border-blue-500" />
+                    <label className="block text-sm font-semibold mb-2 text-blue-700">Company</label>
+                    <Input placeholder="Company name" className="border-blue-200 focus:border-blue-500" />
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold mb-2 text-slate-700">Email</label>
-                  <Input type="email" placeholder="your@email.com" className="border-slate-200 focus:border-blue-500" />
+                  <label className="block text-sm font-semibold mb-2 text-blue-700">Email</label>
+                  <Input type="email" placeholder="your@email.com" className="border-blue-200 focus:border-blue-500" />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold mb-2 text-slate-700">Phone</label>
-                  <Input placeholder="Your phone number" className="border-slate-200 focus:border-blue-500" />
+                  <label className="block text-sm font-semibold mb-2 text-blue-700">Phone</label>
+                  <Input placeholder="Your phone number" className="border-blue-200 focus:border-blue-500" />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold mb-2 text-slate-700">Message</label>
+                  <label className="block text-sm font-semibold mb-2 text-blue-700">Message</label>
                   <Textarea
                     placeholder="Tell us about your security needs..."
                     rows={4}
-                    className="border-slate-200 focus:border-blue-500"
+                    className="border-blue-200 focus:border-blue-500"
                   />
                 </div>
                 <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 text-lg">
@@ -537,7 +533,7 @@ export default function PuremetrixWebsite() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 text-white py-16">
+      <footer className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 text-white py-16 mt-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8">
             <div className="md:col-span-2 space-y-4">
@@ -546,15 +542,16 @@ export default function PuremetrixWebsite() {
                   <img
                     src={companyLogo || "/placeholder.png"}
                     alt="Puremetrix Logo"
-                    className="h-10 w-10 object-contain"
+                    className="h-10 w-10 object-contain rounded-full border border-blue-200 bg-white shadow"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement
                       target.style.display = "none"
                       target.nextElementSibling?.classList.remove("hidden")
                     }}
                   />
-                ) : null}
-                <Shield className={`h-8 w-8 text-yellow-400 ${companyLogo ? "hidden" : ""}`} />
+                ) : (
+                  <Shield className="h-8 w-8 text-yellow-400" />
+                )}
                 <span className="text-2xl font-bold bg-gradient-to-r from-white to-yellow-200 bg-clip-text text-transparent">
                   Puremetrix Engineering
                 </span>
@@ -565,7 +562,6 @@ export default function PuremetrixWebsite() {
               </p>
               <p className="text-sm text-slate-400">In partnership with Badger Distribution</p>
             </div>
-
             <div>
               <h4 className="font-bold mb-4 text-yellow-400">Services</h4>
               <ul className="space-y-2 text-sm text-slate-300">
@@ -588,7 +584,6 @@ export default function PuremetrixWebsite() {
               </ul>
             </div>
           </div>
-
           <div className="border-t border-slate-700 mt-12 pt-8 text-center">
             <p className="text-sm text-slate-400">© 2025 Puremetrix Engineering (Pvt) Ltd. All rights reserved.</p>
           </div>
@@ -613,6 +608,10 @@ export default function PuremetrixWebsite() {
             localStorage.setItem("serviceVideos", JSON.stringify(updated))
           }}
           onLogoUpdate={setCompanyLogo}
+          onContactPhoneUpdate={setContactPhone}
+          onContactEmailUpdate={setContactEmail}
+          onContactAddressUpdate={setContactAddress}
+          onWhatsappUpdate={setWhatsappNumber}
           services={services}
         />
       )}
