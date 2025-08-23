@@ -38,18 +38,28 @@ export default function PuremetrixWebsite() {
   const [serviceVideos, setServiceVideos] = useState<{ [key: string]: string }>({})
   const [companyLogo, setCompanyLogo] = useState("")
 
+  const [contactPhone, setContactPhone] = useState("+263 4 123 4567")
+  const [contactEmail, setContactEmail] = useState("puremetrix@gmail.com")
+  const [contactAddress, setContactAddress] = useState("Norton, Zimbabwe")
+
   useEffect(() => {
     const savedHeroImage = localStorage.getItem("heroImage")
     const savedAboutImage = localStorage.getItem("aboutImage")
     const savedServiceImages = localStorage.getItem("serviceImages")
     const savedServiceVideos = localStorage.getItem("serviceVideos")
     const savedLogo = localStorage.getItem("companyLogo")
+    const savedPhone = localStorage.getItem("contactPhone")
+    const savedEmail = localStorage.getItem("contactEmail")
+    const savedAddress = localStorage.getItem("contactAddress")
 
     if (savedHeroImage) setHeroImage(savedHeroImage)
     if (savedAboutImage) setAboutImage(savedAboutImage)
     if (savedServiceImages) setServiceImages(JSON.parse(savedServiceImages))
     if (savedServiceVideos) setServiceVideos(JSON.parse(savedServiceVideos))
     if (savedLogo) setCompanyLogo(savedLogo)
+    if (savedPhone) setContactPhone(savedPhone)
+    if (savedEmail) setContactEmail(savedEmail)
+    if (savedAddress) setContactAddress(savedAddress)
   }, [])
 
   const handleAdminClick = () => {
@@ -434,7 +444,7 @@ export default function PuremetrixWebsite() {
                   </div>
                   <div>
                     <p className="font-semibold text-slate-900">Phone</p>
-                    <p className="text-slate-600">+263 4 123 4567</p>
+                    <p className="text-slate-600">{contactPhone}</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4 p-4 bg-white rounded-xl shadow-md">
@@ -443,7 +453,7 @@ export default function PuremetrixWebsite() {
                   </div>
                   <div>
                     <p className="font-semibold text-slate-900">Email</p>
-                    <p className="text-slate-600">info@puremetrix.co.zw</p>
+                    <p className="text-slate-600">{contactEmail}</p>
                   </div>
                 </div>
                 <div className="flex items-center space-x-4 p-4 bg-white rounded-xl shadow-md">
@@ -452,7 +462,7 @@ export default function PuremetrixWebsite() {
                   </div>
                   <div>
                     <p className="font-semibold text-slate-900">Address</p>
-                    <p className="text-slate-600">Harare, Zimbabwe</p>
+                    <p className="text-slate-600">{contactAddress}</p>
                   </div>
                 </div>
               </div>
@@ -462,7 +472,7 @@ export default function PuremetrixWebsite() {
                 <div className="flex space-x-4">
                   <Button
                     className="bg-green-600 hover:bg-green-700 text-white font-semibold px-6 py-3"
-                    onClick={() => window.open("https://wa.me/2634123456", "_blank")}
+                    onClick={() => window.open("https://wa.me/263786495533", "_blank")}
                   >
                     <MessageCircle className="h-5 w-5 mr-2" />
                     WhatsApp
@@ -570,7 +580,7 @@ export default function PuremetrixWebsite() {
           </div>
 
           <div className="border-t border-slate-700 mt-12 pt-8 text-center">
-            <p className="text-sm text-slate-400">© 2024 Puremetrix Engineering (Pvt) Ltd. All rights reserved.</p>
+            <p className="text-sm text-slate-400">© 2025 Puremetrix Engineering (Pvt) Ltd. All rights reserved.</p>
           </div>
         </div>
       </footer>
