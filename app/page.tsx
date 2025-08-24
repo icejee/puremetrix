@@ -47,28 +47,20 @@ export default function PuremetrixWebsite() {
   const [promoVideo, setPromoVideo] = useState("")
 
   useEffect(() => {
-    // Load all info from localStorage (set by admin panel)
-    const savedHeroImage = localStorage.getItem("heroImage")
-    const savedAboutImage = localStorage.getItem("aboutImage")
-    const savedServiceImages = localStorage.getItem("serviceImages")
-    const savedServiceVideos = localStorage.getItem("serviceVideos")
-    const savedLogo = localStorage.getItem("companyLogo")
-    const savedPhone = localStorage.getItem("contactPhone")
-    const savedEmail = localStorage.getItem("contactEmail")
-    const savedAddress = localStorage.getItem("contactAddress")
-    const savedWhatsapp = localStorage.getItem("whatsappNumber")
-    const savedPromoVideo = localStorage.getItem("promoVideo")
-
-    if (savedHeroImage) setHeroImage(savedHeroImage)
-    if (savedAboutImage) setAboutImage(savedAboutImage)
-    if (savedServiceImages) setServiceImages(JSON.parse(savedServiceImages))
-    if (savedServiceVideos) setServiceVideos(JSON.parse(savedServiceVideos))
-    if (savedLogo) setCompanyLogo(savedLogo)
-    setContactPhone(savedPhone || "")
-    setContactEmail(savedEmail || "")
-    setContactAddress(savedAddress || "")
-    setWhatsappNumber(savedWhatsapp || "")
-    if (savedPromoVideo) setPromoVideo(savedPromoVideo)
+    fetch('http://localhost:4000/settings')
+      .then(res => res.json())
+      .then(data => {
+        setHeroImage(data.heroImage || "")
+        setAboutImage(data.aboutImage || "")
+        setServiceImages(data.serviceImages || {})
+        setServiceVideos(data.serviceVideos || {})
+        setCompanyLogo(data.companyLogo || "")
+        setContactPhone(data.contactPhone || "")
+        setContactEmail(data.contactEmail || "")
+        setContactAddress(data.contactAddress || "")
+        setWhatsappNumber(data.whatsappNumber || "")
+        setPromoVideo(data.promoVideo || "")
+      })
   }, [])
 
   const handleAdminClick = () => {
@@ -640,4 +632,34 @@ export default function PuremetrixWebsite() {
       )}
     </div>
   )
+}
+
+// Example save function in AdminPanel
+interface ServiceImages {
+  [key: string]: string
+}
+
+interface ServiceVideos {
+  [key: string]: string
+}
+
+interface Settings {
+  heroImage: string
+  aboutImage: string
+  serviceImages: ServiceImages
+  serviceVideos: ServiceVideos
+  companyLogo: string
+  contactPhone: string
+  contactEmail: string
+  contactAddress: string
+  whatsappNumber: string
+  promoVideo: string
+}
+
+const saveSettings = (settings: Settings): void => {
+  fetch('http://localhost:4000/settings', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(settings)
+  })
 }
