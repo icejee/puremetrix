@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { JSX, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -12,18 +12,18 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Badge } from "@/components/ui/badge"
 import { Upload, ImageIcon, Play, Settings, FileText, Users, BarChart3, Save, X, Plus, CheckCircle } from "lucide-react"
 
-interface AdminPanelProps {
+export interface AdminPanelProps {
   onClose: () => void
-  onHeroImageUpdate: (imageUrl: string) => void
-  onAboutImageUpdate: (imageUrl: string) => void
+  onHeroImageUpdate: (url: string) => void
+  onAboutImageUpdate: (url: string) => void
   onServiceImageUpdate: (serviceId: string, imageUrl: string) => void
   onServiceVideoUpdate: (serviceId: string, videoUrl: string) => void
-  onLogoUpdate: (logoUrl: string) => void
-  services: Array<{
-    id: string
-    title: string
-    description: string
-  }>
+  onLogoUpdate: (url: string) => void
+  onContactPhoneUpdate: (phone: string) => void
+  onContactEmailUpdate: (email: string) => void
+  onContactAddressUpdate: (address: string) => void
+  onWhatsappUpdate: (number: string) => void
+  services: Array<{ id: string; icon: JSX.Element; title: string; description: string }>
 }
 
 export default function AdminPanel({
@@ -33,6 +33,10 @@ export default function AdminPanel({
   onServiceImageUpdate,
   onServiceVideoUpdate,
   onLogoUpdate,
+  onContactPhoneUpdate,
+  onContactEmailUpdate,
+  onContactAddressUpdate,
+  onWhatsappUpdate,
   services,
 }: AdminPanelProps) {
   const [activeTab, setActiveTab] = useState("content")
@@ -226,7 +230,12 @@ export default function AdminPanel({
                       <Input
                         id="phone"
                         value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
+                        onChange={e => {
+                          setPhone(e.target.value)
+                          onContactPhoneUpdate(e.target.value)
+                          localStorage.setItem("contactPhone", e.target.value)
+                        }}
+                        placeholder="Enter company phone"
                         className="mt-2 border-slate-300 focus:border-green-500 text-base"
                       />
                     </div>
@@ -237,7 +246,12 @@ export default function AdminPanel({
                       <Input
                         id="email"
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        onChange={e => {
+                          setEmail(e.target.value)
+                          onContactEmailUpdate(e.target.value)
+                          localStorage.setItem("contactEmail", e.target.value)
+                        }}
+                        placeholder="Enter company email"
                         className="mt-2 border-slate-300 focus:border-green-500 text-base"
                       />
                     </div>
@@ -248,7 +262,12 @@ export default function AdminPanel({
                       <Input
                         id="address"
                         value={address}
-                        onChange={(e) => setAddress(e.target.value)}
+                        onChange={e => {
+                          setAddress(e.target.value)
+                          onContactAddressUpdate(e.target.value)
+                          localStorage.setItem("contactAddress", e.target.value)
+                        }}
+                        placeholder="Enter company address"
                         className="mt-2 border-slate-300 focus:border-green-500 text-base"
                       />
                     </div>
