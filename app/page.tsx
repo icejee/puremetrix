@@ -44,6 +44,8 @@ export default function PuremetrixWebsite() {
   const [contactAddress, setContactAddress] = useState("")
   const [whatsappNumber, setWhatsappNumber] = useState("")
 
+  const [promoVideo, setPromoVideo] = useState("")
+
   useEffect(() => {
     // Load all info from localStorage (set by admin panel)
     const savedHeroImage = localStorage.getItem("heroImage")
@@ -55,6 +57,7 @@ export default function PuremetrixWebsite() {
     const savedEmail = localStorage.getItem("contactEmail")
     const savedAddress = localStorage.getItem("contactAddress")
     const savedWhatsapp = localStorage.getItem("whatsappNumber")
+    const savedPromoVideo = localStorage.getItem("promoVideo")
 
     if (savedHeroImage) setHeroImage(savedHeroImage)
     if (savedAboutImage) setAboutImage(savedAboutImage)
@@ -65,6 +68,7 @@ export default function PuremetrixWebsite() {
     setContactEmail(savedEmail || "")
     setContactAddress(savedAddress || "")
     setWhatsappNumber(savedWhatsapp || "")
+    if (savedPromoVideo) setPromoVideo(savedPromoVideo)
   }, [])
 
   const handleAdminClick = () => {
@@ -164,7 +168,7 @@ export default function PuremetrixWebsite() {
                 {companyLogo ? (
                   <img
                     src={companyLogo}
-                    alt="Puremetrix Logo"
+                    alt="puremetrix logo"
                     className="h-12 w-12 object-contain rounded-full border border-blue-200 bg-white shadow"
                     onError={(e) => {
                       const target = e.target as HTMLImageElement
@@ -213,6 +217,25 @@ export default function PuremetrixWebsite() {
         </div>
       </nav>
 
+      {/* Promo Video Section */}
+      {promoVideo && (
+        <section className="w-full flex justify-center items-center bg-gradient-to-r from-blue-100 via-yellow-50 to-blue-100 py-12">
+          <div className="max-w-3xl w-full rounded-2xl shadow-xl overflow-hidden border border-blue-200 bg-white">
+            <video
+              src={promoVideo}
+              controls
+              autoPlay
+              loop
+              className="w-full h-[400px] object-cover rounded-2xl"
+              style={{ background: "#eee" }}
+            />
+            <div className="p-4 text-center text-lg font-semibold text-blue-900">
+              Welcome to Puremetrix Engineering – Explore Our Products!
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-slate-900 text-white py-24 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -237,8 +260,7 @@ export default function PuremetrixWebsite() {
                 </span>
               </h1>
               <p className="text-xl leading-relaxed text-blue-100 max-w-2xl">
-                Puremetrix Engineering provides comprehensive security solutions for medium to large enterprises. From
-                safes and vault doors to advanced biometric systems, we protect what matters most.
+                Puremetrix engineering private limited is an electronic security integration company wholly dedicated to the security needs of medium to large enterprises.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
@@ -540,7 +562,7 @@ export default function PuremetrixWebsite() {
               <div className="flex items-center space-x-3">
                 {companyLogo ? (
                   <img
-                    src={companyLogo || "/placeholder.png"}
+                    src={companyLogo || "/puremetrix logo.png"}
                     alt="Puremetrix Logo"
                     className="h-10 w-10 object-contain rounded-full border border-blue-200 bg-white shadow"
                     onError={(e) => {
@@ -612,6 +634,7 @@ export default function PuremetrixWebsite() {
           onContactEmailUpdate={setContactEmail}
           onContactAddressUpdate={setContactAddress}
           onWhatsappUpdate={setWhatsappNumber}
+          onPromoVideoUpdate={setPromoVideo}
           services={services}
         />
       )}

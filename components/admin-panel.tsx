@@ -23,6 +23,7 @@ export interface AdminPanelProps {
   onContactEmailUpdate: (email: string) => void
   onContactAddressUpdate: (address: string) => void
   onWhatsappUpdate: (number: string) => void
+  onPromoVideoUpdate: (videoUrl: string) => void // <-- Add this line
   services: Array<{ id: string; icon: JSX.Element; title: string; description: string }>
 }
 
@@ -37,6 +38,7 @@ export default function AdminPanel({
   onContactEmailUpdate,
   onContactAddressUpdate,
   onWhatsappUpdate,
+  onPromoVideoUpdate, // <-- Add this here
   services,
 }: AdminPanelProps) {
   const [activeTab, setActiveTab] = useState("content")
@@ -351,6 +353,39 @@ export default function AdminPanel({
                   </CardContent>
                 </Card>
               </div>
+
+              <Card className="border-2 border-dashed border-green-300 hover:border-green-500 transition-colors bg-gradient-to-br from-green-50 to-white">
+                <CardContent className="flex flex-col items-center justify-center p-8 text-center">
+                  <Upload className="h-16 w-16 text-green-500 mb-4" />
+                  <h3 className="font-bold mb-2 text-lg text-slate-900">Upload Promo Video</h3>
+                  <p className="text-sm text-slate-600 mb-6">Upload a welcome video showcasing your products</p>
+                  <input
+                    type="file"
+                    accept="video/*"
+                    onChange={e => {
+                      const file = e.target.files?.[0]
+                      if (file) {
+                        const reader = new FileReader()
+                        reader.onload = ev => {
+                          const videoUrl = ev.target?.result as string
+                          onPromoVideoUpdate(videoUrl)
+                          localStorage.setItem("promoVideo", videoUrl)
+                          setNotification("Promo video uploaded successfully!")
+                        }
+                        reader.readAsDataURL(file)
+                      }
+                    }}
+                    className="hidden"
+                    id="promo-video-upload"
+                  />
+                  <Button asChild className="bg-green-600 hover:bg-green-700 font-semibold">
+                    <label htmlFor="promo-video-upload" className="cursor-pointer">
+                      <Play className="h-4 w-4 mr-2" />
+                      Choose Promo Video
+                    </label>
+                  </Button>
+                </CardContent>
+              </Card>
             </TabsContent>
 
             <TabsContent value="services" className="p-8 space-y-8">
