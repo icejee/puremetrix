@@ -25,16 +25,24 @@ const SettingsSchema = new mongoose.Schema({
 const Settings = mongoose.model('Settings', SettingsSchema)
 
 app.get('/settings', async (req, res) => {
-  const settings = await Settings.findOne()
-  res.json(settings)
+  try {
+    const settings = await Settings.findOne()
+    res.json(settings)
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch settings', details: err.message })
+  }
 })
 
 app.post('/settings', async (req, res) => {
-  let settings = await Settings.findOne()
-  if (!settings) settings = new Settings()
-  Object.assign(settings, req.body)
-  await settings.save()
-  res.json(settings)
+  try {
+    let settings = await Settings.findOne()
+    if (!settings) settings = new Settings()
+    Object.assign(settings, req.body)
+    await settings.save()
+    res.json(settings)
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to save settings', details: err.message })
+  }
 })
 
 // For file uploads (images/videos)
